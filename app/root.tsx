@@ -6,11 +6,16 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import { ThemeProvider } from "flowbite-react";
 import { useDarkMode } from "./hooks/useDarkMode";
 import type { Route } from "./+types/root";
 import "./app.css";
-
+import { AuthContextProvider } from "./context/AuthContext";
+import { flowbiteTheme } from "./theme/flowbite";
+import { UserProvider } from "./context/UserContext";
+import { ModalProvider } from "./context/ModalContext";
 export const links: Route.LinksFunction = () => [
+  { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
     rel: "preconnect",
@@ -19,7 +24,15 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+    href: "https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap",
+  },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Birthstone&display=swap",
+  },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap",
   },
 ];
 
@@ -31,6 +44,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <script src="https://apis.google.com/js/api.js"></script>
+        <script
+          src="https://accounts.google.com/gsi/client"
+          async
+          defer
+        ></script>
       </head>
       <body>
         {children}
@@ -43,7 +62,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   useDarkMode();
-  return <Outlet />;
+  return (
+    <ThemeProvider theme={flowbiteTheme} root>
+      <ModalProvider>
+        <AuthContextProvider>
+          <UserProvider>
+            <Outlet />
+          </UserProvider>
+        </AuthContextProvider>
+      </ModalProvider>
+    </ThemeProvider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

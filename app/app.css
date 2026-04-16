@@ -3,4 +3,10 @@
 @source "../.flowbite-react/class-list.json";
 
 @variant dark (&:where(.dark, .dark *));
+.font-logo-primary {
+  font-family: "Sansation", sans-serif;
+}
 
+.font-logo-secondary {
+  font-family: "Birthstone", sans-serif;
+}

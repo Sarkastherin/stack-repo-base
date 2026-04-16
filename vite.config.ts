@@ -6,11 +6,6 @@ import flowbiteReact from "flowbite-react/plugin/vite";
 
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths(), flowbiteReact()],
-  resolve: {
-    alias: {
-      "react-csv": "react-csv/lib/index.js",
-    },
-  },
   optimizeDeps: {
     include: [
       "react-icons/md",
@@ -23,5 +18,6 @@ export default defineConfig({
       "react-icons/fi",
       "react-data-table-component",
     ],
+    exclude: ["react-csv", "prop-types"],
   },
 });

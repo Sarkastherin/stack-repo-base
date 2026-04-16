@@ -2,7 +2,7 @@ import { DarkThemeToggle } from "flowbite-react";
 
 export function Welcome() {
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center p-8">
+    <main className=" bg-white dark:bg-gray-900 flex items-center justify-center p-8">
       <div className="max-w-2xl w-full space-y-10">
         <div className="flex items-start justify-between">
           <div>
